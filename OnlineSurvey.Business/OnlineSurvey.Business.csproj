@@ -1,0 +1,22 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Autofac" Version="8.1.1" />
+    <PackageReference Include="AutoMapper" Version="13.0.1" />
+    <PackageReference Include="FluentValidation" Version="11.11.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Http" Version="2.2.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\OnlineSurvey.Core\OnlineSurvey.Core.csproj" />
+    <ProjectReference Include="..\OnlineSurvey.DataAccess\OnlineSurvey.DataAccess.csproj" />
+    <ProjectReference Include="..\OnlineSurvey.Entities\OnlineSurvey.Entities.csproj" />
+  </ItemGroup>
+
+</Project>

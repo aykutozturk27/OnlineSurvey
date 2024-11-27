@@ -7,7 +7,7 @@
 </div>
 
 <div class="mb-3">
-  <label for="filterText" class="form-label">Anket ara</label>
+  <label for="filterText" class="form-label">Seçenek ara</label>
   <input
     type="text"
     [(ngModel)]="filterText"
@@ -21,18 +21,20 @@
   {{ filterText }} aradınız
 </div>
 
-<div class="mb-3">
+<div class="row">
   <table class="table table-bordered table-responsive table-hover">
     <thead>
       <tr>
-          <th>Başlık</th>
-          <th>Oluşturan Kullanıcı</th>
+          <th>Seçenek Metni</th>
+          <th>Oy Sayısı</th>
+          <th>Anket Başlığı</th>
       </tr>
   </thead>
   <tbody>
-      <tr *ngFor="let poll of polls">
-          <td>{{poll.title}}</td>
-          <td>{{poll.userName}}</td>
+      <tr *ngFor="let option of options">
+          <td>{{option.optionText}}</td>
+          <td>{{option.voteCount}}</td>
+          <td>{{option.pollTitle}}</td>
       </tr>
   </tbody>
   </table>
@@ -40,6 +42,6 @@
 
 <div class="mt-3">
   <div class="form-group">
-    <button routerLink = "/polls/add" class="btn btn-primary btn-lg">Anket Ekle</button>
+    <button routerLink = "/options/add" class="btn btn-primary btn-lg">Seçenek Ekle</button>
   </div>
 </div>

@@ -13,6 +13,9 @@ import { NaviComponent } from './components/navi/navi.component';
 import { PollComponent } from './components/poll/poll.component';
 import { PollDetailComponent } from './components/poll-detail/poll-detail.component';
 import { PollAddComponent } from './components/poll-add/poll-add.component';
+import { OptionComponent } from './components/option/option.component';
+import { OptionAddComponent } from './components/option-add/option-add.component';
+import { PollResultComponent } from './components/poll-result/poll-result.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +25,10 @@ import { PollAddComponent } from './components/poll-add/poll-add.component';
     NaviComponent,
     PollComponent,
     PollDetailComponent,
-    PollAddComponent
+    PollAddComponent,
+    OptionComponent,
+    OptionAddComponent,
+    PollResultComponent
   ],
   imports: [
     BrowserModule,

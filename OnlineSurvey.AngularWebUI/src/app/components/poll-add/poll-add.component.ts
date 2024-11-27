@@ -19,6 +19,13 @@ export class PollAddComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.createPollAddForm();
+  }
+
+  createPollAddForm(){
+    this.pollAddForm = this.formBuilder.group({
+      title: ["", Validators.required]
+    })
   }
 
   add(){

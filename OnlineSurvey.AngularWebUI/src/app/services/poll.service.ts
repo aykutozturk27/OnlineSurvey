@@ -28,4 +28,7 @@ export class PollService {
     return this.httpClient.post<ResponseModel>(environment.apiUrl + "polls/add", poll);
   }
 
+  getPollResult(pollId: number) : Observable<SingleResponseModel<Poll>> {
+    return this.httpClient.get<SingleResponseModel<Poll>>(environment.apiUrl + "polls/getPollResult/:pollId"+ pollId);
+  }
 }

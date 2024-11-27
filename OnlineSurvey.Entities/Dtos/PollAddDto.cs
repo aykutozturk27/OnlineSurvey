@@ -1,15 +1,12 @@
 ﻿using OnlineSurvey.Core.Entities;
+using OnlineSurvey.Entities.Concrete;
 
-namespace OnlineSurvey.Entities.Concrete
+namespace OnlineSurvey.Entities.Dtos
 {
-    /// <summary>
-    /// Anket tablosu
-    /// </summary>
-    public class Poll : BaseEntity
+    public class PollAddDto : IDto
     {
         public string Title { get; set; }
         public int UserId { get; set; }
-        public User User { get; set; }
         public List<Option> Options { get; set; }
     }
 }

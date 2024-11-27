@@ -2,10 +2,10 @@
 
 namespace OnlineSurvey.Entities.Dtos
 {
-    public class PollDto : IDto
+    public class PollDetailDto : IDto
     {
+        public int Id { get; set; }
         public string Title { get; set; }
-        public int UserId { get; set; }
-        public List<string> Options { get; set; }
+        public string UserName { get; set; }
     }
 }

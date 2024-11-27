@@ -94,6 +94,14 @@ namespace OnlineSurvey.DataAccess.Migrations
                         .HasColumnType("nvarchar(100)")
                         .HasColumnName("email");
 
+                    b.Property<string>("FirstName")
+                        .HasColumnType("nvarchar(100)")
+                        .HasColumnName("firstName");
+
+                    b.Property<string>("LastName")
+                        .HasColumnType("nvarchar(100)")
+                        .HasColumnName("lastName");
+
                     b.Property<byte[]>("PasswordHash")
                         .IsRequired()
                         .HasColumnType("varbinary(500)")
@@ -103,6 +111,10 @@ namespace OnlineSurvey.DataAccess.Migrations
                         .IsRequired()
                         .HasColumnType("varbinary(500)")
                         .HasColumnName("password_salt");
+
+                    b.Property<bool>("Status")
+                        .HasColumnType("bit")
+                        .HasColumnName("status");
 
                     b.HasKey("Id");
 

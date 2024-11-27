@@ -34,9 +34,12 @@ namespace OnlineSurvey.DataAccess.Migrations
                 {
                     id = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
+                    firstName = table.Column<string>(type: "nvarchar(100)", nullable: true),
+                    lastName = table.Column<string>(type: "nvarchar(100)", nullable: true),
                     email = table.Column<string>(type: "nvarchar(100)", nullable: false),
                     password_salt = table.Column<byte[]>(type: "varbinary(500)", nullable: false),
-                    password_hash = table.Column<byte[]>(type: "varbinary(500)", nullable: false)
+                    password_hash = table.Column<byte[]>(type: "varbinary(500)", nullable: false),
+                    status = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {

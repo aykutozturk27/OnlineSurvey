@@ -15,7 +15,27 @@ namespace OnlineSurvey.WebAPI.Controllers
             _optionService = optionService;
         }
 
-        [HttpPost]
+        [HttpGet]
+        public IActionResult GetAll()
+        {
+            var result = _optionService.GetAll();
+            if (!result.Success)
+                return BadRequest(result);
+            return Ok(result);
+        }
+
+        [HttpPost("add")]
+        public IActionResult Add([FromBody] OptionAddDto optionAddDto)
+        {
+            var result = _optionService.Add(optionAddDto);
+
+            if (!result.Success)
+                return BadRequest(result);
+
+            return Ok(result);
+        }
+
+        [HttpPost("update")]
         public IActionResult Update([FromBody] OptionUpdateDto optionUpdateDto)
         {
             var result = _optionService.Update(optionUpdateDto);

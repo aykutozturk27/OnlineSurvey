@@ -15,17 +15,26 @@ namespace OnlineSurvey.WebAPI.Controllers
             _pollService = pollService;
         }
 
-        [HttpGet]
-        public IActionResult GetById(int id)
+        [HttpGet("getall")]
+        public IActionResult GetAll()
         {
-            var result = _pollService.GetById(id);
+            var result = _pollService.GetAll();
             if (!result.Success)
                 return BadRequest(result);
             return Ok(result);
         }
 
-        [HttpPost]
-        public IActionResult Add([FromBody] PollDto pollDto)
+        [HttpGet("getbyid")]
+        public IActionResult GetById(int pollId)
+        {
+            var result = _pollService.GetById(pollId);
+            if (!result.Success)
+                return BadRequest(result);
+            return Ok(result);
+        }
+
+        [HttpPost("add")]
+        public IActionResult Add([FromBody] PollAddDto pollDto)
         {
             var result = _pollService.Add(pollDto);
             if(result.Success)

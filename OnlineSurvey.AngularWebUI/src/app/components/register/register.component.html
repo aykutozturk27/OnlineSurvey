@@ -1,0 +1,33 @@
+<body class="text-center">
+  <main class="form-signin">
+    <form [formGroup] = "registerForm">
+      <h1 class="h3 mb-3 fw-normal">Üye Ol</h1>
+
+      <div class="form-floating">
+        <input
+          formControlName = "email"
+          type="email"
+          class="form-control"
+          id="email"
+          placeholder="E-mail adresi"
+        />
+        <label for="email">E-posta</label>
+      </div>
+      <div class="form-floating">
+        <input
+          formControlName = "password"
+          type="password"
+          class="form-control"
+          id="password"
+          placeholder="Parola"
+        />
+        <label for="password">Parola</label>
+      </div>
+
+      <button class="w-100 btn btn-lg btn-primary" (click) = "register()">
+        Üye Ol
+      </button>
+      <p class="mt-5 mb-3 text-muted">&copy; 2024</p>
+    </form>
+  </main>
+</body>

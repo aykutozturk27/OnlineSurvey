@@ -5,7 +5,8 @@ namespace OnlineSurvey.Business.Abstract
 {
     public interface IPollService
     {
-        IDataResult<PollDto> GetById(int pollId);
-        IResult Add(PollDto pollDto);
+        IDataResult<PollListDto> GetAll();
+        IDataResult<PollDetailDto> GetById(int pollId);
+        IResult Add(PollAddDto pollDto);
     }
 }

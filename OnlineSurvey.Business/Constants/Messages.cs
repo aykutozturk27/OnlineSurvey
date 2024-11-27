@@ -14,7 +14,10 @@
         public static string EmailIsNotEmpty = "Email adresi boş geçilemez!";
         public static string PasswordIsNotEmpty = "Şifre boş geçilemez!";
 
+        public static string OptionsListed = "Seçenekler listelendi.";
+        public static string NamedOptionAdded = " adlı seçenek eklendi.";
         public static string NamedOptionUpdated = " adlı seçenek güncellendi.";
+        public static string ErrorWhileNamedOptionAdded = " adlı seçenek eklenirken bir hata oluştu!";
         public static string ErrorWhileNamedOptionUpdated = " adlı seçenek güncellenirken bir hata oluştu!";
 
         public static string PollsListed = "Anketler listelendi.";

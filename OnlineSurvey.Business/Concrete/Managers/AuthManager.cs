@@ -26,9 +26,12 @@ namespace OnlineSurvey.Business.Concrete.Managers
             HashingHelper.CreatePasswordHash(password, out passwordHash, out passwordSalt);
             var user = new User
             {
+                FirstName = userForRegisterDto.FirstName,
+                LastName = userForRegisterDto.LastName,
                 Email = userForRegisterDto.Email,
                 PasswordHash = passwordHash,
-                PasswordSalt = passwordSalt
+                PasswordSalt = passwordSalt,
+                Status = true
             };
             _userService.Add(user);
             return new SuccessDataResult<User>(user, Messages.UserRegistered);

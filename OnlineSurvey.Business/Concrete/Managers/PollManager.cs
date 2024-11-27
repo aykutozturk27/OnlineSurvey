@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Http;
 using OnlineSurvey.Business.Abstract;
 using OnlineSurvey.Business.Constants;
 using OnlineSurvey.Core.Utilities.Results.Abstract;
@@ -13,24 +14,31 @@ namespace OnlineSurvey.Business.Concrete.Managers
     {
         private readonly IPollDal _pollDal;
         private readonly IMapper _mapper;
+        private readonly IHttpContextAccessor _httpContextAccessor;
+        private readonly IUserDal _userDal;
 
-        public PollManager(IPollDal pollDal, IMapper mapper)
+        public PollManager(IPollDal pollDal, IMapper mapper, IHttpContextAccessor httpContextAccessor, IUserDal userDal)
         {
             _pollDal = pollDal;
             _mapper = mapper;
+            _httpContextAccessor = httpContextAccessor;
+            _userDal = userDal;
         }
 
-        public IResult Add(PollDto pollDto)
+        public IResult Add(PollAddDto pollAddDto)
         {
-            if (pollDto.Options.Count < 2)
+            var createdUserId = _userDal.Get(x => x.Email == _httpContextAccessor.HttpContext.User.Identity.Name).Id;
+
+            if (pollAddDto.Options.Count < 2)
                 return new ErrorResult(Messages.PollMustHaveAtLeastTwoOptions);
 
-            var poll = _mapper.Map<Poll>(pollDto);
+            var poll = _mapper.Map<Poll>(pollAddDto);
 
             var newPoll = new Poll
             {
-                Title = pollDto.Title,
-                UserId = pollDto.UserId
+                Title = pollAddDto.Title,
+                UserId = createdUserId,
+                Options = pollAddDto.Options
             };
 
             var addedPoll = _pollDal.Add(newPoll);
@@ -40,11 +48,17 @@ namespace OnlineSurvey.Business.Concrete.Managers
             return new SuccessResult(addedPoll.Title + Messages.NamedPollAdded);
         }
 
-        public IDataResult<PollDto> GetById(int pollId)
+        public IDataResult<PollListDto> GetAll()
         {
-            var poll = _pollDal.Get(x => x.Id == pollId);
-            var mappedPoll = _mapper.Map<PollDto>(poll);
-            return new SuccessDataResult<PollDto>(mappedPoll, Messages.PollListed);
+            var pollList = _pollDal.GetList();
+            var mappedPollList = _mapper.Map<PollListDto>(pollList);
+            return new SuccessDataResult<PollListDto>(mappedPollList, Messages.PollsListed);
+        }
+
+        public IDataResult<PollDetailDto> GetById(int pollId)
+        {
+            var mappedPoll = _pollDal.GetPollDetail(pollId);
+            return new SuccessDataResult<PollDetailDto>(mappedPoll, Messages.PollListed);
         }
     }
 }

@@ -8,7 +8,11 @@ namespace OnlineSurvey.Business.Mappings.AutoMapper.Profiles
     {
         public PollProfile()
         {
-            CreateMap<Poll, PollDto>().ReverseMap();
+            CreateMap<List<Poll>, PollListDto>()
+                .ForMember(x => x.Polls, y => y.MapFrom(z => z.ToList()))
+                .ReverseMap();
+            CreateMap<Poll, PollDetailDto>().ReverseMap();
+            CreateMap<Poll, PollAddDto>().ReverseMap();
         }
     }
 }

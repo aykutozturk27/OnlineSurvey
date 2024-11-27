@@ -1,4 +1,5 @@
-﻿using OnlineSurvey.Business.Abstract;
+﻿using AutoMapper;
+using OnlineSurvey.Business.Abstract;
 using OnlineSurvey.Business.Constants;
 using OnlineSurvey.Core.Utilities.Results.Abstract;
 using OnlineSurvey.Core.Utilities.Results.Concrete;
@@ -11,22 +12,47 @@ namespace OnlineSurvey.Business.Concrete.Managers
     public class OptionManager : IOptionService
     {
         private readonly IOptionDal _optionDal;
+        private readonly IMapper _mapper;
 
-        public OptionManager(IOptionDal optionDal)
+        public OptionManager(IOptionDal optionDal, IMapper mapper)
         {
             _optionDal = optionDal;
+            _mapper = mapper;
         }
 
-        public IResult Update(OptionUpdateDto optionDto)
+        public IResult Add(OptionAddDto optionAddDto)
         {
-            var option = _optionDal.Get(x => x.Id == optionDto.Id);
+            var newOption = new Option
+            {
+                OptionText = optionAddDto.OptionText,
+                VoteCount = optionAddDto.VoteCount++,
+                PollId = optionAddDto.PollId
+            };
+
+            var addedOption = _optionDal.Add(newOption);
+            if (addedOption == null)
+                return new ErrorResult(addedOption.OptionText + Messages.ErrorWhileNamedOptionAdded);
+
+            return new SuccessResult(addedOption.OptionText + Messages.NamedOptionAdded);
+        }
+
+        public IDataResult<OptionListDto> GetAll()
+        {
+            var optionList = _optionDal.GetList();
+            var mappedOptionList = _mapper.Map<OptionListDto>(optionList);
+            return new SuccessDataResult<OptionListDto>(mappedOptionList, Messages.OptionsListed);
+        }
+
+        public IResult Update(OptionUpdateDto optionUpdateDto)
+        {
+            var option = _optionDal.Get(x => x.Id == optionUpdateDto.Id);
 
             var updateOption = new Option
             {
-                Id = optionDto.Id,
-                OptionText = optionDto.OptionText,
-                VoteCount = optionDto.VoteCount++,
-                PollId = optionDto.PollId
+                Id = optionUpdateDto.Id,
+                OptionText = optionUpdateDto.OptionText,
+                VoteCount = optionUpdateDto.VoteCount++,
+                PollId = optionUpdateDto.PollId
             };
 
             var updatedOption = _optionDal.Update(updateOption);

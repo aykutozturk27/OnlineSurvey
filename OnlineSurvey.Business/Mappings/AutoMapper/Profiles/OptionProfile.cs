@@ -7,9 +7,7 @@ namespace OnlineSurvey.Business.Mappings.AutoMapper.Profiles
     public class OptionProfile : Profile
     {
         public OptionProfile() {
-            CreateMap<List<Option>, OptionListDto>()
-                .ForMember(x => x.Options, y => y.MapFrom(z => z.ToList()))
-                .ReverseMap();
+            CreateMap<List<Option>, OptionListDto>().ReverseMap();
         }
     }
 }

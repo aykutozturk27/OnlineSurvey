@@ -36,11 +36,10 @@ namespace OnlineSurvey.Business.Concrete.Managers
             return new SuccessResult(addedOption.OptionText + Messages.NamedOptionAdded);
         }
 
-        public IDataResult<OptionListDto> GetAll()
+        public IDataResult<List<OptionListDto>> GetAll()
         {
-            var optionList = _optionDal.GetList();
-            var mappedOptionList = _mapper.Map<OptionListDto>(optionList);
-            return new SuccessDataResult<OptionListDto>(mappedOptionList, Messages.OptionsListed);
+            var optionList = _optionDal.GetOptionList();
+            return new SuccessDataResult<List<OptionListDto>>(optionList, Messages.OptionsListed);
         }
 
         public IResult Update(OptionUpdateDto optionUpdateDto)

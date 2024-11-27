@@ -1,4 +1,5 @@
-﻿using OnlineSurvey.Core.DataAccess.EntityFramework;
+﻿using Microsoft.EntityFrameworkCore;
+using OnlineSurvey.Core.DataAccess.EntityFramework;
 using OnlineSurvey.DataAccess.Abstract;
 using OnlineSurvey.DataAccess.Concrete.EntityFramework.Contexts;
 using OnlineSurvey.Entities.Concrete;
@@ -8,22 +9,22 @@ namespace OnlineSurvey.DataAccess.Concrete.EntityFramework
 {
     public class EfPollDal : EfEntityRepositoryBase<Poll, OnlineSurveyContext>, IPollDal
     {
-        public PollDetailDto GetPollDetail(int pollId)
+        public PollResultDto GetPollResult(int pollId)
         {
             using (var context = new OnlineSurveyContext())
             {
-                var result = from p in context.Polls
+                var tableResult = from p in context.Polls
                              join u in context.Users
                              on p.UserId equals u.Id
                              where p.Id == pollId
-                             select new PollDetailDto
+                             select new PollResultDto
                              {
-                                 Id = p.Id,
                                  Title = p.Title,
-                                 UserName = u.FullName
+                                 UserName = u.FullName,
                              };
 
-                return result.FirstOrDefault();
+                var result = tableResult.Include(x => x.Options).FirstOrDefault();
+                return result;
             }
         }
     }

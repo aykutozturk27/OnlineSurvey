@@ -6,6 +6,6 @@ namespace OnlineSurvey.DataAccess.Abstract
 {
     public interface IPollDal : IEntityRepository<Poll>
     {
-        PollDetailDto GetPollDetail(int pollId);
+        PollResultDto GetPollResult(int pollId);
     }
 }

@@ -24,19 +24,19 @@ namespace OnlineSurvey.WebAPI.Controllers
             return Ok(result);
         }
 
-        [HttpGet("getbyid")]
-        public IActionResult GetById(int pollId)
+        [HttpGet("getpollresult")]
+        public IActionResult GetPollResult(int pollId)
         {
-            var result = _pollService.GetById(pollId);
+            var result = _pollService.GetPollResult(pollId);
             if (!result.Success)
                 return BadRequest(result);
             return Ok(result);
         }
 
         [HttpPost("add")]
-        public IActionResult Add([FromBody] PollAddDto pollDto)
+        public IActionResult Add([FromBody] PollAddDto pollAddDto)
         {
-            var result = _pollService.Add(pollDto);
+            var result = _pollService.Add(pollAddDto);
             if(result.Success)
                 return BadRequest(result);
             return Ok(result);

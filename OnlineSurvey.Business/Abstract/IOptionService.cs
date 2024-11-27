@@ -5,7 +5,7 @@ namespace OnlineSurvey.Business.Abstract
 {
     public interface IOptionService
     {
-        IDataResult<OptionListDto> GetAll();
+        IDataResult<List<OptionListDto>> GetAll();
         IResult Add(OptionAddDto optionAddDto);
         IResult Update(OptionUpdateDto optionUpdateDto);
     }

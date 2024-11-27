@@ -1,10 +1,12 @@
 ﻿using OnlineSurvey.Core.Entities;
-using OnlineSurvey.Entities.Concrete;
 
 namespace OnlineSurvey.Entities.Dtos
 {
     public class OptionListDto : IDto
     {
-        public List<Option> Options { get; set; }
+        public string OptionText { get; set; }
+        public int VoteCount { get; set; }
+        public int PollId { get; set; }
+        public string PollName { get; set; }
     }
 }

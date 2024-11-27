@@ -1,5 +1,4 @@
 ﻿using OnlineSurvey.Core.Entities;
-using OnlineSurvey.Entities.Concrete;
 
 namespace OnlineSurvey.Entities.Dtos
 {
@@ -7,6 +6,5 @@ namespace OnlineSurvey.Entities.Dtos
     {
         public string Title { get; set; }
         public int UserId { get; set; }
-        public List<Option> Options { get; set; }
     }
 }

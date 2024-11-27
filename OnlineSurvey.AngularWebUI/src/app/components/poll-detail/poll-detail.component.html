@@ -1,0 +1,24 @@
+<div
+  *ngIf="dataLoaded == false"
+  class="spinner-border text-primary"
+  role="status"
+>
+  <span class="visually-hidden">Loading...</span>
+</div>
+
+<div class="row">
+    <table class="table table-bordered table-responsive table-hover table-dark" style="margin-top: 2%;">
+        <thead>
+            <tr>
+                <th>Başlık</th>
+                <th>Oluşturan Kullanıcı</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>{{poll.title}}</td>
+                <td>{{poll.userName}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>

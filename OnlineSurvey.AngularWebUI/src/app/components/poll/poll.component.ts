@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Poll } from 'src/app/models/poll';
+import { PollService } from 'src/app/services/poll.service';
 
 @Component({
   selector: 'app-poll',
@@ -6,10 +8,22 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./poll.component.css']
 })
 export class PollComponent implements OnInit {
+  polls: Poll[] = [];
+  dataLoaded = false;
 
-  constructor() { }
+  filterText = "";
+
+  constructor(private pollService: PollService) { }
 
   ngOnInit() {
+    this.getPolls();
+  }
+
+  getPolls(){
+    this.pollService.getPolls().subscribe(response => {
+      this.polls = response.data;
+      this.dataLoaded = true;
+    })
   }
 
 }
